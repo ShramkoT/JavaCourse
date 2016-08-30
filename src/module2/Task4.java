@@ -1,20 +1,23 @@
 package module2;
 
 public class Task4 {
-    static int fundBalance(int balance, int fund) {
+    static int[] balances = {460, 810, 1200, 930, 1830};
+    static String[] ownerNames = {"Tirion", "Sansa", "Rob", "John", "Deineris"};
 
-        return balance + fund ;
+    static int fundBalance(String name, int fund) {
+        int n = 0;
+        for (int i = 0; i<ownerNames.length; i++) {
+            if (name == ownerNames[i]){
+                n =i;
+                break;
+            }
+        }
+        balances[n]=balances[n] + fund;
+        return n;
     }
 
     public static void main(String[] args) {
-        int[] balances = {460, 810, 1200, 930, 1830};
-        String[] ownerNames = {"Tirion", "Sansa", "Rob", "John", "Deineris"};
-        int fund = 300;
-        int balanceAfter = fundBalance(balances[4], fund);
-
-        if(balanceAfter >= 0) {
-            System.out.println(ownerNames[4] + " " + balanceAfter);
+        int n = fundBalance("Rob", 400);
+        System.out.println(ownerNames[n] + " " + balances[n]);
         }
-
-    }
 }
