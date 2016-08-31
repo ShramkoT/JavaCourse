@@ -14,9 +14,9 @@ public class Task3 {
                 break;
             }
         }
-
-        balances[n] = balances[n] - fund*commition - fund;
-        if (balances[n] >= 0){
+        double d = balances[n] - fund*commition - fund;
+        if (d >= 0){
+            balances[n] = d;
             System.out.println(ownerNames[n] + " " + fund*commition + " " + balances[n]);
         }
         else {
@@ -24,6 +24,6 @@ public class Task3 {
         }
     }
     public static void main(String[] args) {
-        withdrawBalance("John", 630);
+        withdrawBalance("John", 600);
     }
 }
