@@ -1,20 +1,20 @@
 package module3.task1;
 
-public class Bird extends Animal  {
+public class Bird {
     String fly;
     String sing;
-    String Bird;
+    String bird;
 
-    public Bird(String walk, String fly, String sing, String bird) {
-        super(walk);
-        this.fly = fly;
-        this.sing = sing;
-        Bird = bird;
-    }
-    void fly () {
-        System.out.println("I am walking");
+    static void fly () {
         System.out.println("I am flying");
+    }
+
+    static void sing () {
         System.out.println("I am singing");
+    }
+
+    static void bird () {
         System.out.println("I am Bird");
     }
 }
+
