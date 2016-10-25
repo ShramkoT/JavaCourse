@@ -1,6 +1,6 @@
 package module6;
 
-public class ArraysUtils {
+public final class ArraysUtils {
 
     public static int sum(int[] array) {
         int sum = 0;
