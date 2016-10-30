@@ -1,119 +1,73 @@
 package module7;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
+import com.sun.org.apache.xpath.internal.operations.Or;
+
+import javax.swing.*;
+import java.util.*;
 import java.util.List;
 
-public class Order implements Comparator<Order> {
-    private long id;
-    private int price;
-    private Currency currency;
-    private String itemName;
-    private String shopIdentificator;
-    private User user;
+public class Main {
+    public static void main(String[] args) {
+        User user1 = new User(123, "Andrii", "Luskov", "Lutsk", 1200);
+        Order order1 =new Order(213, 150, Currency.UAH, "knife", "Fokstrot", user1 );
 
-    public Order(long id, int price, Currency currency, String itemName, String shopIdentificator, User user) {
-        this.id = id;
-        this.price = price;
-        this.currency = currency;
-        this.itemName = itemName;
-        this.shopIdentificator = shopIdentificator;
-        this.user = user;
-    }
+        User user2 = new User(23423, "Petro", "Chizik", "Lviv", 500);
+        Order order2 =new Order(214, 300, Currency.USD, "fridge", "Fokstrot", user2 );
 
-    public long getId() {
-        return id;
-    }
+        User user3 = new User(75545, "Ivan", "Lichko", "Kiyv", 800);
+        Order order3 =new Order(215, 250, Currency.USD, "mp3 player", "Comfy", user3 );
 
-    public int getPrice() {
-        return price;
-    }
+        User user4 = new User(67544, "Evgen", "Baev", "Lviv", 7000);
+        Order order4 =new Order(216, 2000, Currency.UAH, "jacket", "Moda", user4 );
 
-    public Currency getCurrency() {
-        return currency;
-    }
+        User user5 = new User(213412, "Andrii", "Ziytin", "Kiyv", 22200);
+        Order order5 =new Order(217, 18000, Currency.UAH, "computer", "Eldo", user5 );
 
-    public String getItemName() {
-        return itemName;
-    }
+        User user6 = new User(67584, "Victor", "Datsiuk", "Lutsk", 6800);
+        Order order6 =new Order(218, 2550, Currency.UAH, "chair", "IKEA", user6 );
 
-    public String getShopIdentificator() {
-        return shopIdentificator;
-    }
+        User user7 = new User(232353, "Olga", "Vakulenko", "Lutsk", 200);
+        Order order7 =new Order(219, 100, Currency.USD, "tour", "Tui", user7 );
 
-    public User getUser() {
-        return user;
-    }
+        User user8 = new User(5464334, "Iryna", "Krasko", "Kyiv", 4300);
+        Order order8 =new Order(220, 3600, Currency.UAH, "table", "IKEA", user8 );
 
-    public void setId(long id) {
-        this.id = id;
-    }
+        User user9 = new User(675445, "Alla", "Lusenko", "Kiyv", 6800);
+        Order order9 =new Order(221, 5000, Currency.UAH, "boots", "Ahan", user9 );
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+        User user10 = new User(987433, "Olga", "Babych", "Lviv", 500);
+        Order order10 =new Order(222, 330, Currency.USD, "coat", "Noda", user10 );
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
 
-    public void setShopIdentificator(String shopIdentificator) {
-        this.shopIdentificator = shopIdentificator;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+        ArrayList<Order> list = new ArrayList<Order>();
+        list.add(order1);
+        list.add(order2);
+        list.add(order3);
+        list.add(order4);
+        list.add(order5);
+        list.add(order6);
+        list.add(order7);
+        list.add(order8);
+        list.add(order9);
+        list.add(order10);
 
-    @Override
-    public int compare(Order o1, Order o2) {
-        return 0;
-    }
+        System.out.println(list);
+        sortByOrderDecrease(list);
+        System.out.println(list);
+        Collections.sort(list,sortByOrderIncrAndUserCity);
+        System.out.println(list);
+        Collections.sort(list,sortByItemAndShopIdAndUserCity);
+        System.out.println(list);
+        System.out.println(deleteDublicate(list));
+        System.out.println(deleteItemLittlePrice(list));
+        System.out.println("UAH - " + separateByCur(list)[0] + "\n" + "USD - " + separateByCur(list)[1]);
+        System.out.println("Lviv - " + separateList(list)[0] + "\n" + "Lutsk - " +separateList(list)[1] + "\n" +
+        "Kiyv - " + separateList(list)[2]);
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Order order = (Order) o;
-
-        if (id != order.id) return false;
-        if (price != order.price) return false;
-        if (currency != order.currency) return false;
-        if (!itemName.equals(order.itemName)) return false;
-        if (!shopIdentificator.equals(order.shopIdentificator)) return false;
-        return user.equals(order.user);
 
     }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + price;
-        result = 31 * result + currency.hashCode();
-        result = 31 * result + itemName.hashCode();
-        result = 31 * result + shopIdentificator.hashCode();
-        result = 31 * result + user.hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", price=" + price +
-                ", currency=" + currency +
-                ", itemName='" + itemName + '\'' +
-                ", shopIdentificator='" + shopIdentificator + '\'' +
-                ", user=" + user +
-                '}';
-    }
-
     public static void sortByOrderDecrease(List list){
 
         list.sort(new Comparator<Order>() {
